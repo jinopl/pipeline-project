@@ -1,3 +1,16 @@
+terraform {
+      backend "remote" {
+        organization = "jinopl"
+        workspaces {
+          name = "aws-pipeline"
+        }
+      }
+    }
+
+provider "aws" {
+  region = "us-east-1"
+}
+
 resource "tls_private_key" "example" {
     algorithm = "RSA"
     rsa_bits  = 4096
