@@ -1,0 +1,35 @@
+name: Manually triggered workflow
+on:
+  workflow_dispatch:
+jobs:
+  destroy:
+    name: "Destroy AWS resources"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./AWS/ec2
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: us-east-1
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Show Destroy plan
+      run: terraform plan -destroy
+      continue-on-error: true
+
+    - name: Destroy resources jobs
+      id: destroy
+      run: terraform destroy -auto-approve
