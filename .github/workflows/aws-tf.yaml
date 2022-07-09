@@ -19,6 +19,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./AWS/ec2
 
     steps:
     # Checkout the repository to the GitHub Actions runner
