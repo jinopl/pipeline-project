@@ -26,7 +26,7 @@ resource "aws_instance" "aws-pipeline" {
   instance_type = "t2.micro"
   key_name      = aws_key_pair.generated_key.key_name
   vpc_security_group_ids = [aws_security_group.aws-pipeline-ingress-sg.id , aws_security_group.aws-pipeline-egress-sg.id]
-  user_data = << EOF
+  user_data = <<EOF
 		#! /bin/bash
     sudo apt-get update
 		sudo apt-get install -y apache2
