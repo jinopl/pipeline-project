@@ -27,13 +27,13 @@ resource "aws_instance" "aws-pipeline" {
   key_name      = aws_key_pair.generated_key.key_name
   vpc_security_group_ids = [aws_security_group.aws-pipeline-ingress-sg.id , aws_security_group.aws-pipeline-egress-sg.id]
   user_data = <<EOF
-		#!/bin/bash
-    sudo apt-get update
-		sudo apt-get install -y apache2
-		sudo systemctl start apache2
-		sudo systemctl enable apache2
-		echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
-	EOF
+#!/bin/bash
+sudo apt-get update -y
+sudo apt-get install -y apache2
+sudo systemctl start apache2 
+sudo systemctl enable apache2
+echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
+EOF
   tags = {
     Name = "aws-pipeline"
   }
