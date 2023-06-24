@@ -10,6 +10,3 @@ Create vm in multicloud display a sample webpage using terraform
 
 Create k8 cluster and deploy sample webpage application
 
-- [ ] phase 3
-
-
