@@ -30,8 +30,9 @@ resource "aws_instance" "aws-pipeline" {
     #!/bin/bash -xe
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install apache2 -y && sudo systemctl start apache2
-    sudo apt install php -y && sudo systemctl start php
+    sudo apt-get -qq -y install apache2 libapache2-mod-php php
+    sudo systemctl start apache2
+    sudo systemctl start php
     curl https://gist.githubusercontent.com/jinopl/48fff7865190b7cd0a86a8127a5d29bd/raw/3af2ffc4745ab34ca42e3537de123c19111f380e/hostname.html > /var/www/html/index.html
     EOF
   tags = {
