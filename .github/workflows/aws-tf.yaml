@@ -6,9 +6,6 @@ on:
     - "master"
     paths:
       - './AWS/**'
-    paths-ignore:
-      - '.github/workflows/**'
-
 permissions:
   contents: read
 
