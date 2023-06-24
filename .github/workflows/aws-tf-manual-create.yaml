@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   destroy:
-    name: "Destroy AWS resources"
+    name: "Create AWS resources"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -28,11 +28,9 @@ jobs:
     
     - name: Terraform Init
       run: terraform init
+    
+    - name: Terraform Plan
+      run: terraform plan -input=false
 
-    - name: Show Destroy plan
-      run: terraform plan -destroy
-      continue-on-error: true
-
-    - name: Destroy resources jobs
-      id: destroy
-      run: terraform destroy -auto-approve
+    - name: Terraform Apply
+      run: terraform apply -auto-approve -input=false
